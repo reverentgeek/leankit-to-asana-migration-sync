@@ -1,0 +1,107 @@
+{
+	"assignedUsers": [
+		{
+			"userId": "12341",
+			"name": "David",
+			"lkUserId": "332323"
+		},
+		{
+			"userId": "12344",
+			"name": "Greg",
+			"lkUserId": "332324"
+		},
+		{
+			"userId": "12345",
+			"name": "Matt",
+			"lkUserId": "332325"
+		}
+	],
+	"defaultTaskType": "1201660911110409",
+	"cardTypeMappings": [
+		{
+			"taskTypeId": "1201660911110405",
+			"name": "Docs",
+			"cardTypes": [
+				"722236467"
+			]
+		},
+		{
+			"taskTypeId": "1201660911110406",
+			"name": "Support",
+			"cardTypes": [
+				"722236465"
+			]
+		},
+		{
+			"taskTypeId": "1201660911110407",
+			"name": "Learning",
+			"cardTypes": [
+				"722236468"
+			]
+		},
+		{
+			"taskTypeId": "1201660911110408",
+			"name": "Review",
+			"cardTypes": [
+				"885832651"
+			]
+		},
+		{
+			"taskTypeId": "1201660911110409",
+			"name": "Other",
+			"cardTypes": [
+				"722236464"
+			]
+		}
+	],
+	"laneSectionMappings": [
+		{
+			"name": "Backlog",
+			"sectionId": "1201660911110392",
+			"lanes": [
+				"722236475",
+				"1535424086",
+				"722236480"
+			]
+		},
+		{
+			"name": "Up Next",
+			"sectionId": "1201660911110384",
+			"lanes": [
+				"1531992768",
+				"722236485"
+			]
+		},
+		{
+			"name": "In Progress",
+			"sectionId": "1201660911110388",
+			"lanes": [
+				"1527229832",
+				"1527229830"
+			]
+		},
+		{
+			"name": "Awaiting External",
+			"sectionId": "1201854477461015",
+			"lanes": [
+				"1605560311"
+			]
+		},
+		{
+			"name": "Awaiting Internal",
+			"sectionId": "1201660911110389",
+			"lanes": [
+				"1605560310",
+				"1527229831"
+			]
+		},
+		{
+			"name": "Complete",
+			"sectionId": "1201660911110393",
+			"lanes": [
+				"722236483",
+				"822719812"
+			]
+		}
+	]
+}
