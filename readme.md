@@ -53,3 +53,7 @@ Migrate or sync LeanKit cards to Asana project and store mapped tasks in a file.
 ```sh
 node . sync ./mapping.json --file ./sync.json
 ```
+
+You may run the sync as many times as needed. The utility will only update existing tasks when the card has been moved to a different lane since the last sync.
+
+> Note: Under normal conditions, the sync will not create duplicate tasks. However, if there is an Asana API error when fetching an existing task, it may result in creating a duplicate task.
