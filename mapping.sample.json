@@ -17,6 +17,9 @@
 		}
 	],
 	"defaultTaskType": "1201660911110409",
+	"excludeCardTypes": [
+		"722236467"
+	],
 	"cardTypeMappings": [
 		{
 			"taskTypeId": "1201660911110405",

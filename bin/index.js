@@ -71,7 +71,9 @@ program
 		logger.debug( "options:", options );
 		logger.info( "synchronizing all cards..." );
 		const res = await leankit.getCards();
-		const cards = res.cards;
+
+		// Filter out excluded card types
+		const cards = res.cards.filter( card => !mappings.excludeCardTypes.includes( card.cardType.id ) );
 
 		const tasks = cards.map( card => mapper.mapCardToTask( card ) );
 		if ( !test ) {
