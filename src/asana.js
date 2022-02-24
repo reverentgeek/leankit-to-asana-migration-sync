@@ -203,8 +203,42 @@ module.exports = ( logger ) => {
 		}
 	}
 
+	async function updateTask( id, { name, externalId, url, taskType, assignee, cardId, notes = "" } ) {
+		try {
+			const config = {
+				method: "put",
+				url: `https://app.asana.com/api/1.0/tasks/${ id }`,
+				headers: {
+					Authorization: `Bearer ${ asanaToken }`
+				},
+				data: {
+					data: {
+						name,
+						notes,
+						assignee,
+						custom_fields: { }
+					}
+				}
+			};
+
+			config.data.data.custom_fields[`${ externalFieldId }`] = externalId;
+			config.data.data.custom_fields[`${ urlId }`] = url;
+			config.data.data.custom_fields[`${ taskTypeId }`] = taskType;
+			config.data.data.custom_fields[`${ leankitFieldId }`] = cardId;
+
+			logger.info( `Updating task [${ name }]` );
+			const res = await axios( config );
+			return res.data;
+
+		} catch ( err ) {
+			logger.error( err );
+			return "Error: " + err.message;
+		}
+	}
+
 	return {
 		createTask,
+		updateTask,
 		getProject,
 		moveTaskToSection,
 		deleteTask,

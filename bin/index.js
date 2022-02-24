@@ -65,7 +65,8 @@ program
 	.description( "Sync all active cards to Asana using mapping file" )
 	.option( "-t, --test", "Test sync" )
 	.option( "-f, --file <output-file>", "Store results in output file" )
-	.action( async ( mapping, { test, file }, options ) => {
+	.option ( "-u, --update", "Update existing tasks only" )
+	.action( async ( mapping, { test, file, update }, options ) => {
 		const mappings = await fs.readJson( mapping );
 		const mapper = await mapperClient( mappings, logger );
 		logger.debug( "options:", options );
@@ -74,18 +75,21 @@ program
 
 		// Filter out excluded card types
 		const cards = res.cards.filter( card => !mappings.excludeCardTypes.includes( card.cardType.id ) );
-
+		for( const card of cards ) {
+			const c = await leankit.getCard( card.id );
+			card.description = c.description;
+		}
 		const tasks = cards.map( card => mapper.mapCardToTask( card ) );
 		if ( !test ) {
 			for( const t of tasks ) {
 				const task = await asana.getTaskByLeanKitId( t.cardId );
-				if ( !task ) {
+				if ( !task && !update ) {
 					const res = await asana.createTask( t );
 					t.gid = res.data.gid;
 					await asana.moveTaskToSection( t.sectionId, t.gid );
-				} else {
-					logger.info( `Task already exists [${ task.name }]` );
+				} else if ( task ) {
 					t.gid = task.gid;
+					await asana.updateTask( t.gid, t );
 					if ( task.section.gid !== t.sectionId ) {
 						logger.info( `Moving task [${ task.name }]` );
 						await asana.moveTaskToSection( t.sectionId, t.gid );

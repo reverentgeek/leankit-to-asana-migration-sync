@@ -35,6 +35,9 @@ module.exports = ( mapping, logger ) => {
 			notes: card.description ?? "",
 			cardId: card.id
 		};
+		if ( task.notes.length > 0 ) {
+			task.notes = task.notes.replace( /&quot;/g, "\"" ).replace( /<p>/g, "" ).replace( /<\/p>/g, "\n\n" );
+		}
 		task.taskType = mapCardTypeToTaskType( card.cardType.id );
 		task.sectionId = mapLaneToSection( card.laneId );
 		task.assignee = card.assignedUsers.length > 0 ? mapUser( card.assignedUsers[0].id ) : null;

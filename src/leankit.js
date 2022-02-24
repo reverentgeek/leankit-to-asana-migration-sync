@@ -63,8 +63,33 @@ module.exports = ( logger ) => {
 		}
 	};
 
+	const getCard = async ( cardId ) => {
+		try {
+
+			const config = {
+				method: "get",
+				url: `https://${ host }.leankit.com/io/card/${ cardId }`,
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				auth: {
+					username, password
+				}
+			};
+			logger.info( `getting card [${ cardId }]...` );
+			const res = await axios( config );
+			return res.data;
+
+		} catch ( err ) {
+			logger.error( err );
+			return null;
+		}
+	};
+
 	return {
 		getBoard,
+		getCard,
 		getCards
 	};
 };
